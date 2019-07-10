@@ -35,7 +35,7 @@ class LinkedinResourceOwner extends GenericOAuth2ResourceOwner
     public function getUserInformation(array $accessToken, array $extraParameters = [])
     {
         $response = parent::getUserInformation($accessToken, $extraParameters);
-        $responseData = $response->getData();
+        $responseData = $response->getResponse();
         // The user info returned by /me doesn't contain the email so we make an extra request to fetch it
         $content = $this->httpRequest(
             $this->normalizeUrl($this->options['email_url'], $extraParameters),
@@ -47,7 +47,7 @@ class LinkedinResourceOwner extends GenericOAuth2ResourceOwner
             $responseData['emailAddress'] = $emailResponse['elements'][0]['handle~']['emailAddress'];
         }
         // errors not handled because I don't see any relevant thing to do with them
-        $response->setData($responseData);
+        $response->setResponse($responseData);
         return $response;
     }
     /**
