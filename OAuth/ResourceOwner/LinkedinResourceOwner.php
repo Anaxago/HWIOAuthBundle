@@ -60,7 +60,7 @@ class LinkedinResourceOwner extends GenericOAuth2ResourceOwner
     /**
      * {@inheritdoc}
      */
-    protected function httpRequest($url, $content = null, array $headers = [], $method = null)
+    protected function httpRequest($url, $content = null, $headers = array(), $method = null)
     {
         // Linkedin v2 API is supposed to require Content-Type: application/json but it works without
         // and request to get the access token doesn't seems to work with Content-Type: application/json
